@@ -1,0 +1,18 @@
+type Query {
+    providers: [Provider!]!
+}
+
+type Provider {
+    drgDefinition: String!
+    providerId: Int!
+    providerName: String!
+    providerStreetAddress: String!
+    providerCity: String!
+    providerState: String!
+    providerZipCode: Int!
+    hospitalReferralRegionDescription: String!
+    totalDischarges: Int!
+    averageCoveredCharges: Float!
+    averageTotalPayments: Float!
+    averageMedicarePayments: Float!
+}

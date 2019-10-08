@@ -1,25 +1,27 @@
 import { GraphQLServer, Options } from 'graphql-yoga';
 
-const typeDefs = `
-    type Query {
-        hello(name: String): String!
-    }
-`;
+import { connectDB } from './db';
+import models from './db/models';
+import resolvers from './graphql/resolvers';
 
-const resolvers = {
-    Query: {
-        hello(_: any, { name }: any) {
-            return `Hello ${name || 'World'}`;
-        },
-    },
+const db = connectDB();
+
+const context = {
+    db,
+    models,
 };
 
 const options: Options = {
     port: 3000,
 };
 
-const server = new GraphQLServer({ typeDefs, resolvers });
+const server = new GraphQLServer({
+    typeDefs: `${__dirname}/graphql/schema.graphql`,
+    resolvers,
+    context,
+});
 
 server.start(options, ({ port }) =>
+    // tslint:disable-next-line
     console.log(`Server is running on localhost:${port}`),
 );
