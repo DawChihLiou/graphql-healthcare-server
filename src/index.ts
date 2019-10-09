@@ -3,16 +3,15 @@ import { GraphQLServer, Options } from 'graphql-yoga';
 import { connectDB } from './db';
 import models from './db/models';
 import resolvers from './graphql/resolvers';
-
-const db = connectDB();
+import { ENV } from './env';
 
 const context = {
-    db,
     models,
 };
 
 const options: Options = {
-    port: 3000,
+    port: ENV.PORT,
+    playground: '/playground',
 };
 
 const server = new GraphQLServer({
@@ -21,6 +20,7 @@ const server = new GraphQLServer({
     context,
 });
 
+connectDB();
 server.start(options, ({ port }) =>
     // tslint:disable-next-line
     console.log(`Server is running on localhost:${port}`),
