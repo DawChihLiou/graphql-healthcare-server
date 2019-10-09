@@ -1,5 +1,5 @@
 type Query {
-    providers: [Provider!]!
+    providers(first: Int): [Provider!]!
 }
 
 type Provider {

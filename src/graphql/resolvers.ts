@@ -1,7 +1,7 @@
 const resolvers = {
     Query: {
         async providers(parent: any, args: any, { models }: any) {
-            const Providers = await models.Provider.find({});
+            const Providers = await models.Provider.find().limit(args.first);
             return Providers;
         },
     },

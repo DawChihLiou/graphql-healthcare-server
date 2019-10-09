@@ -11,7 +11,10 @@ const context = {
 
 const options: Options = {
     port: ENV.PORT,
+    endpoint: '/graphql',
     playground: '/playground',
+    subscriptions: false,
+    tracing: true,
 };
 
 const server = new GraphQLServer({
